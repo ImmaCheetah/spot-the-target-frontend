@@ -31,5 +31,10 @@
     "jsdom": "^24.1.1",
     "vite": "^5.3.4",
     "vitest": "^2.0.4"
-  }
+  },
+  "description": "> [Live Website](https://immacheetah.github.io/project-name/)",
+  "main": "vite.config.js",
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
 }
