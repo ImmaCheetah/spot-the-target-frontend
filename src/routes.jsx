@@ -1,20 +1,19 @@
 import App from "./App";
 import HomePage from "./pages/HomePage";
+import MapPage from "./pages/MapPage";
 // import ErrorPage from "./pages/ErrorPage/ErrorPage";
+
 
 const routes = [
   {
-    path: "/",
     element: <App />,
-    // errorElement: <ErrorPage />,
     children: [
-      // { index: true, element: <HomePage /> },
-
+      { path: "/", element: <HomePage /> },
+      {
+        path: "/map1",
+        element: <MapPage />,
+      },
     ],
-  },
-  {
-    path: "/home",
-    element: <HomePage />,
   },
 ];
 

@@ -121,8 +121,8 @@ input[type="number"] {
 }
 
 img {
-  width: 100%;
-  image-rendering: pixelated;
+  width: 300px;
+  /* image-rendering: pixelated; */
 }
 
 /* main {
