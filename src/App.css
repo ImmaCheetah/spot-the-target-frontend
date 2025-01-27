@@ -120,11 +120,6 @@ input[type="number"] {
   -moz-appearance: textfield;
 }
 
-img {
-  width: 300px;
-  /* image-rendering: pixelated; */
-}
-
 /* main {
   display: flex;
   flex-direction: column;

@@ -8,9 +8,9 @@ export default function MapSelect() {
   return (
     <>
       <div>
-        <MapCard title="Carnisol" imgSrc={map1} />
-        <MapCard title="Prehistoric" imgSrc={map2} />
-        <MapCard title="Medieval" imgSrc={map3} />
+        <MapCard id="1" title="Carnisol" imgSrc={map1} />
+        <MapCard id="2" title="Prehistoric" imgSrc={map2} />
+        <MapCard id="3" title="Medieval" imgSrc={map3} />
       </div>
     </>
   )

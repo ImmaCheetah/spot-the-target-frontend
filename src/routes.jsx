@@ -10,7 +10,7 @@ const routes = [
     children: [
       { path: "/", element: <HomePage /> },
       {
-        path: "/map1",
+        path: "/map/:mapId",
         element: <MapPage />,
       },
     ],
