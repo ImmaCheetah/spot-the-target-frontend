@@ -12,9 +12,9 @@ export default function MapPage() {
   let {mapId} = useParams();
   let imgSrc;
 
-  const mousePosition = useMousePosition();
   const [isVisible, setIsVisible] = useState(false);
-  const [dropdownPos, setDropdownPos] = useState({})
+  const [mousePosition, setMousePosition] = useState({x: 0, y: 0});
+  const [dropdownPos, setDropdownPos] = useState({x: 0, y: 0});
   
   if (mapId === '1') {
     imgSrc = map1
@@ -24,24 +24,39 @@ export default function MapPage() {
     imgSrc = map3
   }
 
-  console.log(mousePosition);
-
   function handleClick(e) {
     setIsVisible(!isVisible);
     setDropdownPos(mousePosition)
   }
 
+  function handleMouseMove(e) {
+    let rect = e.currentTarget.getBoundingClientRect();
+
+    setMousePosition({
+      x: e.clientX - rect.left, 
+      y: e.clientY - rect.top
+    });
+  }
 
   return (
-    <div onClick={handleClick}>
+    <div >
       <h2>Map page</h2>
       <p>
         Your cursor position:
         <br />
         {JSON.stringify(mousePosition)}
       </p>
-      {isVisible && <Dropdown coordinates={dropdownPos}/>}
-      <img src={imgSrc} alt="" className={styles.mapImg}/>
+
+      <div className={styles.imgContainer}>
+        {isVisible && <Dropdown coordinates={dropdownPos}/>}
+        <img
+          src={imgSrc}
+          alt=""
+          className={styles.mapImg}
+          onClick={handleClick}
+          onMouseMove={handleMouseMove}
+        />
+      </div>
     </div>
   )
 }

@@ -2,3 +2,7 @@
   width: 100%;
   image-rendering: pixelated;
 }
+
+.imgContainer {
+  position: relative;
+}

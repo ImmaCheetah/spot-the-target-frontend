@@ -16,7 +16,7 @@ export default function Dropdown({targets, coordinates}) {
   return (
     <form style={{
       position: "absolute",
-      left: coordinates.x + 50,
+      left: coordinates.x,
       top: coordinates.y
     }}>
       <ul>
