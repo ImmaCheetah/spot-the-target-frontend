@@ -4,7 +4,6 @@ import map1 from "../assets/maps/carnisol.gif"
 import map2 from "../assets/maps/prehistoric.gif"
 import map3 from "../assets/maps/medieval.gif"
 import { useState } from "react";
-import useMousePosition from "../hooks/useMousePosition";
 import Dropdown from "../components/Dropdown";
 
 
