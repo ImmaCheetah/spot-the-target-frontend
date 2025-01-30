@@ -1,3 +1,4 @@
+import styles from "./components.module.css";
 import { useParams } from "react-router-dom";
 
 
@@ -58,10 +59,10 @@ export default function Dropdown({targets, coordinates}) {
   return (
     <div style={{
       position: "absolute",
-      left: coordinates.x,
-      top: coordinates.y
+      left: coordinates.x + 25,
+      top: coordinates.y - 25
     }}>
-      <ul>
+      <ul className={styles.dropdownList}>
         {
           mockTargets.map((target, index) => {
             return (

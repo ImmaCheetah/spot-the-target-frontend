@@ -5,6 +5,7 @@ import map2 from "../assets/maps/prehistoric.gif"
 import map3 from "../assets/maps/medieval.gif"
 import { useState } from "react";
 import Dropdown from "../components/Dropdown";
+import TargetCircle from "../components/TargetCircle";
 
 
 export default function MapPage() {
@@ -14,6 +15,7 @@ export default function MapPage() {
   const [isVisible, setIsVisible] = useState(false);
   const [mousePosition, setMousePosition] = useState({x: 0, y: 0});
   const [dropdownPos, setDropdownPos] = useState({x: 0, y: 0});
+  const [targetCircle, setTargetCircle] = useState({x: 0, y: 0});
   
   if (mapId === '1') {
     imgSrc = map1
@@ -26,6 +28,7 @@ export default function MapPage() {
   function handleClick(e) {
     setIsVisible(!isVisible);
     setDropdownPos(mousePosition)
+    setTargetCircle(mousePosition)
   }
 
   function handleMouseMove(e) {
@@ -48,6 +51,7 @@ export default function MapPage() {
 
       <div className={styles.imgContainer}>
         {isVisible && <Dropdown coordinates={dropdownPos}/>}
+        {isVisible && <TargetCircle coordinates={targetCircle}/>}
         <img
           src={imgSrc}
           alt=""
