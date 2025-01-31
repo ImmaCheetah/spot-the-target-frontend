@@ -72,6 +72,15 @@ export default function MapPage() {
     });
   }
 
+  // This is to update dropdown state locally after finding a target instead of making a new request each time
+  function handleTargets(targetId) {
+    setTargets(
+      targets.filter((target) => {
+        return target.id !== targetId;
+      })
+    )
+  }
+
   if (loading) return <p>Loading...</p>;
 
   return (
@@ -84,7 +93,7 @@ export default function MapPage() {
       </p>
 
       <div className={styles.imgContainer}>
-        {isVisible && <Dropdown coordinates={dropdownPos} targets={targets}/>}
+        {isVisible && <Dropdown coordinates={dropdownPos} targets={targets} handleTargets={handleTargets} />}
         {isVisible && <TargetCircle coordinates={targetCircle}/>}
         <img
           src={imgSrc}

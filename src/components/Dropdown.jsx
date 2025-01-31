@@ -2,7 +2,7 @@ import styles from "./components.module.css";
 import { useParams } from "react-router-dom";
 
 
-export default function Dropdown({targets, coordinates}) {
+export default function Dropdown({targets, coordinates, handleTargets}) {
   const {mapId} = useParams();
 
   function handleClick(e) {
@@ -33,6 +33,10 @@ export default function Dropdown({targets, coordinates}) {
 
       if (response.status === 200) {
         console.log(res)
+        // Check if target is found and only then delete from dropdown locally
+        if (res.isFound) {
+          handleTargets(targetId)
+        }
       }
       // console.log(response.json());
     } catch (error) {
@@ -49,13 +53,15 @@ export default function Dropdown({targets, coordinates}) {
       <ul className={styles.dropdownList}>
         {
           targets.map((target, index) => {
-            return (
-              <li key={index}>
-                <button type="submit" id={target.id} onClick={handleClick}>
-                  {target.name}
-                </button>
-              </li>
-            )
+            if (!target.isFound) {
+              return (
+                <li key={index}>
+                  <button type="submit" id={target.id} onClick={handleClick}>
+                    {target.name}
+                  </button>
+                </li>
+              )
+            }
           })
         }
       </ul>
