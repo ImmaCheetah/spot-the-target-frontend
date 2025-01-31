@@ -13,6 +13,7 @@ export default function MapPage() {
   const [mousePosition, setMousePosition] = useState({x: 0, y: 0});
   const [dropdownPos, setDropdownPos] = useState({x: 0, y: 0});
   const [targetCircle, setTargetCircle] = useState({x: 0, y: 0});
+  const [targets, setTargets] = useState([]);
   const [imgSrc, setImgSrc] = useState();
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState(true);
@@ -34,8 +35,11 @@ export default function MapPage() {
 
         if (response.status === 200) {
           const res = await response.json();
+          console.log(res)
           const mapName = res.map.name;
+          const targets = res.map.targets;
 
+          setTargets(targets)
           if (mapName === "Carnisol") {
             setImgSrc(carnisolImg)
           } else if (mapName === "Prehistoric") {
@@ -80,7 +84,7 @@ export default function MapPage() {
       </p>
 
       <div className={styles.imgContainer}>
-        {isVisible && <Dropdown coordinates={dropdownPos}/>}
+        {isVisible && <Dropdown coordinates={dropdownPos} targets={targets}/>}
         {isVisible && <TargetCircle coordinates={targetCircle}/>}
         <img
           src={imgSrc}

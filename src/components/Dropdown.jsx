@@ -3,22 +3,6 @@ import { useParams } from "react-router-dom";
 
 
 export default function Dropdown({targets, coordinates}) {
-
-  let mockTargets = [
-    {
-      id: "35559179-5701-4f43-8bce-b45804dc2f8e",
-      name: 'target1'
-    },
-    {
-      id: "35559179-5701-4f43-8bce-b45804dc2f8e2",
-      name: 'target2'
-    },
-    {
-      id: "35559179-5701-4f43-8bce-b45804dc2f8e3",
-      name: 'target3'
-    }
-  ]
-
   const {mapId} = useParams();
 
   function handleClick(e) {
@@ -64,7 +48,7 @@ export default function Dropdown({targets, coordinates}) {
     }}>
       <ul className={styles.dropdownList}>
         {
-          mockTargets.map((target, index) => {
+          targets.map((target, index) => {
             return (
               <li key={index}>
                 <button type="submit" id={target.id} onClick={handleClick}>
