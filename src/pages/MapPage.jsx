@@ -7,19 +7,18 @@ import { useParams } from "react-router-dom"
 import Dropdown from "../components/Dropdown";
 import TargetCircle from "../components/TargetCircle";
 
-
 export default function MapPage() {
   const [isVisible, setIsVisible] = useState(false);
   const [mousePosition, setMousePosition] = useState({x: 0, y: 0});
   const [dropdownPos, setDropdownPos] = useState({x: 0, y: 0});
   const [targetCircle, setTargetCircle] = useState({x: 0, y: 0});
+  const [dimensions, setDimensions] = useState({ naturalWidth: 0, naturalHeight: 0, loadedWidth: 0, loadedHeight: 0 });
   const [targets, setTargets] = useState([]);
   const [imgSrc, setImgSrc] = useState();
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState(true);
-
+  
   let {mapId} = useParams();
-
   useEffect(() => {
     const data = async () => {
       try {
@@ -79,6 +78,21 @@ export default function MapPage() {
         return target.id !== targetId;
       })
     )
+
+    const newTargets = [...targets];
+    const target = newTargets.find(
+      t => t.id === targetId
+    )
+    target.isFound = true;
+    setTargets(newTargets);
+    setIsVisible(false)
+  }
+
+  function handleImageLoad(e) {
+    const rect = e.currentTarget.getBoundingClientRect();
+    const { naturalHeight, naturalWidth } = e.target;
+
+    setDimensions({ naturalWidth, naturalHeight, loadedWidth: rect.width, loadedHeight: rect.height });
   }
 
   if (loading) return <p>Loading...</p>;
@@ -93,14 +107,34 @@ export default function MapPage() {
       </p>
 
       <div className={styles.imgContainer}>
-        {isVisible && <Dropdown coordinates={dropdownPos} targets={targets} handleTargets={handleTargets} />}
+        {isVisible && 
+        <Dropdown 
+          coordinates={dropdownPos} 
+          targets={targets} 
+          dimensions={dimensions}
+          handleTargets={handleTargets} 
+          />}
         {isVisible && <TargetCircle coordinates={targetCircle}/>}
+        {
+          targets.map((target) => {
+            if (target.isFound) {
+              return (
+                <div key={target.id} className={styles.targetFoundX} style={{
+                  position: "absolute",
+                  left: parseInt(target.coordinates.x)- 20,
+                  top: parseInt(target.coordinates.y) - 20
+                }}>X</div>
+              )
+            }
+          })
+        }
         <img
           src={imgSrc}
           alt=""
           className={styles.mapImg}
           onClick={handleClick}
           onMouseMove={handleMouseMove}
+          onLoad={handleImageLoad}
         />
       </div>
     </div>

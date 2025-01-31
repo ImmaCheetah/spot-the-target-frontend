@@ -1,8 +1,20 @@
 .mapImg {
-  /* width: 100%; */
+  width: 100%;
   image-rendering: pixelated;
 }
 
 .imgContainer {
   position: relative;
+}
+
+.targetFoundX {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 40px;
+  height: 40px;
+  border: solid 1px red;
+  color: red;
+  font-size: 1.5rem;
+  font-weight: bold;
 }
