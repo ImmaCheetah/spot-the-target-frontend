@@ -1,31 +1,59 @@
 import styles from "./pages.module.css";
+import carnisolImg from "../assets/maps/carnisol.gif"
+import prehistoricImg from "../assets/maps/prehistoric.gif"
+import medievalImg from "../assets/maps/medieval.gif"
+import { useState, useEffect } from "react";
 import { useParams } from "react-router-dom"
-import map1 from "../assets/maps/carnisol.gif"
-import map2 from "../assets/maps/prehistoric.gif"
-import map3 from "../assets/maps/medieval.gif"
-import { useState } from "react";
 import Dropdown from "../components/Dropdown";
 import TargetCircle from "../components/TargetCircle";
 
 
 export default function MapPage() {
-  let {mapId} = useParams();
-  let imgSrc;
-
   const [isVisible, setIsVisible] = useState(false);
   const [mousePosition, setMousePosition] = useState({x: 0, y: 0});
   const [dropdownPos, setDropdownPos] = useState({x: 0, y: 0});
   const [targetCircle, setTargetCircle] = useState({x: 0, y: 0});
-  
-  if (mapId === '1') {
-    imgSrc = map1
-  } else if (mapId === '2') {
-    imgSrc = map2
-  } else {
-    imgSrc = map3
-  }
+  const [imgSrc, setImgSrc] = useState();
+  const [error, setError] = useState(null);
+  const [loading, setLoading] = useState(true);
 
-  function handleClick(e) {
+  let {mapId} = useParams();
+
+  useEffect(() => {
+    const data = async () => {
+      try {
+        const response = await fetch(`http://localhost:8080/map/${mapId}`, {
+          method: "GET",
+        });
+
+        if (response.status >= 400) {
+          const errors = await response.json();
+          console.log(errors);
+          setError(errors);
+        }
+
+        if (response.status === 200) {
+          const res = await response.json();
+          const mapName = res.map.name;
+
+          if (mapName === "Carnisol") {
+            setImgSrc(carnisolImg)
+          } else if (mapName === "Prehistoric") {
+            setImgSrc(prehistoricImg)
+          } else {
+            setImgSrc(medievalImg)
+          }
+        }
+      } catch (error) {
+        console.log(error);
+      } finally {
+        setLoading(false);
+      }
+    };
+    data();
+  }, []);
+
+  function handleClick() {
     setIsVisible(!isVisible);
     setDropdownPos(mousePosition)
     setTargetCircle(mousePosition)
@@ -39,6 +67,8 @@ export default function MapPage() {
       y: e.clientY - rect.top
     });
   }
+
+  if (loading) return <p>Loading...</p>;
 
   return (
     <div >

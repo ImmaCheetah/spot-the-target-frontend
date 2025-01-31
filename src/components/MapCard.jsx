@@ -8,7 +8,6 @@ export default function MapCard({id, title, imgSrc}) {
     <div>
       <p>{title}</p>
       <img src={imgSrc} alt="" className={styles.cardImg}/>
-      {/* <button className={styles.playBtn}>Play</button> */}
       <Link to={`map/${id}`}>Play</Link>
     </div>
   )
