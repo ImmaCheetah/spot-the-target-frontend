@@ -1,19 +1,17 @@
-import normalizeCoords from "../helper/normalizeCoords";
+import normalizeCoords, { standardCoords } from "../helper/normalizeCoords";
 import styles from "./components.module.css";
 import { useParams } from "react-router-dom";
 
-
-export default function Dropdown({targets, coordinates, dimensions, handleTargets}) {
+export default function Dropdown({targets, coordinates, dimensions, handleTargets, targetFoundArr, setTargetFoundArr}) {
   const {mapId} = useParams();
 
   function handleClick(e) {
     e.preventDefault();
     const targetId = e.target.id;
-    const { naturalWidth, naturalHeight, loadedWidth, loadedHeight} = dimensions;
-    console.log(targetId, coordinates.x, coordinates.y)
-    const {normX, normY} = normalizeCoords(coordinates.x, coordinates.y, loadedWidth, loadedHeight, naturalWidth, naturalHeight)
-    console.log(normX, normY)
-    verifyTargetReq(targetId, normX, normY)
+    const {naturalWidth, naturalHeight, loadedWidth, loadedHeight} = dimensions;
+    const {normX, normY} = normalizeCoords(coordinates.x, coordinates.y, loadedWidth, loadedHeight, naturalWidth, naturalHeight);
+
+    verifyTargetReq(targetId, normX, normY);
   }
 
   async function verifyTargetReq(targetId, x, y) {
@@ -37,6 +35,16 @@ export default function Dropdown({targets, coordinates, dimensions, handleTarget
 
         // Check if target is found and only then delete from dropdown locally
         if (res.isFound) {
+          console.log('IN VERIFY FOUND', x, y)
+          console.log(targetFoundArr)
+
+          // setTargetFoundArr((prevArr) => {
+          //   console.log(prevArr); 
+          //   return [
+          //     ...prevArr,
+          //     { x: x, y: y }
+          //   ];
+          // });
           handleTargets(targetId)
         }
       }
@@ -45,6 +53,7 @@ export default function Dropdown({targets, coordinates, dimensions, handleTarget
       console.log(error);
     }
   }
+  
   
   return (
     <div style={{

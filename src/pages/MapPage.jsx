@@ -6,14 +6,17 @@ import { useState, useEffect } from "react";
 import { useParams } from "react-router-dom"
 import Dropdown from "../components/Dropdown";
 import TargetCircle from "../components/TargetCircle";
+import { standardCoords } from "../helper/normalizeCoords";
+import TargetMarker from "../components/TargetMarker";
+
 
 export default function MapPage() {
   const [isVisible, setIsVisible] = useState(false);
   const [mousePosition, setMousePosition] = useState({x: 0, y: 0});
-  const [dropdownPos, setDropdownPos] = useState({x: 0, y: 0});
-  const [targetCircle, setTargetCircle] = useState({x: 0, y: 0});
+  const [clickedPos, setClickedPos] = useState({x: 0, y: 0});
   const [dimensions, setDimensions] = useState({ naturalWidth: 0, naturalHeight: 0, loadedWidth: 0, loadedHeight: 0 });
   const [targets, setTargets] = useState([]);
+  const [targetFoundArr, setTargetFoundArr] = useState([]);
   const [imgSrc, setImgSrc] = useState();
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState(true);
@@ -58,8 +61,7 @@ export default function MapPage() {
 
   function handleClick() {
     setIsVisible(!isVisible);
-    setDropdownPos(mousePosition)
-    setTargetCircle(mousePosition)
+    setClickedPos(mousePosition)
   }
 
   function handleMouseMove(e) {
@@ -91,7 +93,7 @@ export default function MapPage() {
   function handleImageLoad(e) {
     const rect = e.currentTarget.getBoundingClientRect();
     const { naturalHeight, naturalWidth } = e.target;
-
+   
     setDimensions({ naturalWidth, naturalHeight, loadedWidth: rect.width, loadedHeight: rect.height });
   }
 
@@ -109,25 +111,15 @@ export default function MapPage() {
       <div className={styles.imgContainer}>
         {isVisible && 
         <Dropdown 
-          coordinates={dropdownPos} 
+          coordinates={clickedPos} 
           targets={targets} 
           dimensions={dimensions}
-          handleTargets={handleTargets} 
+          handleTargets={handleTargets}
+          targetFoundArr={targetFoundArr}
+          setTargetFoundArr={setTargetFoundArr} 
           />}
-        {isVisible && <TargetCircle coordinates={targetCircle}/>}
-        {
-          targets.map((target) => {
-            if (target.isFound) {
-              return (
-                <div key={target.id} className={styles.targetFoundX} style={{
-                  position: "absolute",
-                  left: parseInt(target.coordinates.x)- 20,
-                  top: parseInt(target.coordinates.y) - 20
-                }}>X</div>
-              )
-            }
-          })
-        }
+        {isVisible && <TargetCircle coordinates={clickedPos}/>}
+        <TargetMarker targets={targets} dimensions={dimensions} />
         <img
           src={imgSrc}
           alt=""
