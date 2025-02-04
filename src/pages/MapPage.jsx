@@ -16,12 +16,13 @@ export default function MapPage() {
   const [clickedPos, setClickedPos] = useState({x: 0, y: 0});
   const [dimensions, setDimensions] = useState({ naturalWidth: 0, naturalHeight: 0, loadedWidth: 0, loadedHeight: 0 });
   const [targets, setTargets] = useState([]);
-  const [targetFoundArr, setTargetFoundArr] = useState([]);
+  const [foundTargets, setFoundTargets] = useState([]);
   const [imgSrc, setImgSrc] = useState();
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState(true);
   
   let {mapId} = useParams();
+
   useEffect(() => {
     const data = async () => {
       try {
@@ -42,6 +43,7 @@ export default function MapPage() {
           const targets = res.map.targets;
 
           setTargets(targets)
+
           if (mapName === "Carnisol") {
             setImgSrc(carnisolImg)
           } else if (mapName === "Prehistoric") {
@@ -58,6 +60,19 @@ export default function MapPage() {
     };
     data();
   }, []);
+
+  // Create a new array that calculates the reverse normalized coordinates of each target
+  // Set that in a state variable and update based on target or dimension change
+  useEffect(() => {
+    const foundTargetsList = targets.map((target) => {
+      const {naturalWidth, naturalHeight, loadedWidth, loadedHeight} = dimensions;
+      const {standardX, standardY} = standardCoords(target.coordinates.x, target.coordinates.y, naturalWidth, naturalHeight, loadedWidth, loadedHeight);
+
+      return {x: standardX, y: standardY}
+    })
+
+    setFoundTargets(foundTargetsList)
+  }, [targets, dimensions])
 
   function handleClick() {
     setIsVisible(!isVisible);
@@ -86,7 +101,7 @@ export default function MapPage() {
       t => t.id === targetId
     )
     target.isFound = true;
-    setTargets(newTargets);
+    // setTargets(newTargets);
     setIsVisible(false)
   }
 
@@ -115,11 +130,9 @@ export default function MapPage() {
           targets={targets} 
           dimensions={dimensions}
           handleTargets={handleTargets}
-          targetFoundArr={targetFoundArr}
-          setTargetFoundArr={setTargetFoundArr} 
-          />}
+        />}
         {isVisible && <TargetCircle coordinates={clickedPos}/>}
-        <TargetMarker targets={targets} dimensions={dimensions} />
+        <TargetMarker targets={foundTargets} />
         <img
           src={imgSrc}
           alt=""
