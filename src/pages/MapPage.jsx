@@ -68,7 +68,7 @@ export default function MapPage() {
       const {naturalWidth, naturalHeight, loadedWidth, loadedHeight} = dimensions;
       const {standardX, standardY} = standardCoords(target.coordinates.x, target.coordinates.y, naturalWidth, naturalHeight, loadedWidth, loadedHeight);
 
-      return {x: standardX, y: standardY}
+      return {x: standardX, y: standardY, isFound: target.isFound}
     })
 
     setFoundTargets(foundTargetsList)
@@ -101,7 +101,7 @@ export default function MapPage() {
       t => t.id === targetId
     )
     target.isFound = true;
-    // setTargets(newTargets);
+    setTargets(newTargets);
     setIsVisible(false)
   }
 
@@ -117,12 +117,6 @@ export default function MapPage() {
   return (
     <div >
       <h2>Map page</h2>
-      <p>
-        Your cursor position:
-        <br />
-        {JSON.stringify(mousePosition)}
-      </p>
-
       <div className={styles.imgContainer}>
         {isVisible && 
         <Dropdown 

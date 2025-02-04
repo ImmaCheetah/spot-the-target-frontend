@@ -6,13 +6,15 @@ export default function TargetMarker({targets}) {
     <div>
       {
         targets.map((target, index) => {
-          return (
-            <div key={index} className={styles.targetFoundX} style={{
-              position: "absolute",
-              left: target.x - 20,
-              top: target.y - 20
-            }}>X</div>
-          )
+          if (target.isFound) {
+            return (
+              <div key={index} className={styles.targetFoundX} style={{
+                position: "absolute",
+                left: target.x - 20,
+                top: target.y - 20
+              }}>X</div>
+            )
+          }
         })
       }
     </div>
