@@ -8,6 +8,8 @@ import Dropdown from "../components/Dropdown";
 import TargetCircle from "../components/TargetCircle";
 import { standardCoords } from "../helper/normalizeCoords";
 import TargetMarker from "../components/TargetMarker";
+import Stopwatch from "../components/Stopwatch";
+
 
 
 export default function MapPage() {
@@ -20,7 +22,7 @@ export default function MapPage() {
   const [imgSrc, setImgSrc] = useState();
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState(true);
-  
+
   let {mapId} = useParams();
 
   useEffect(() => {
@@ -30,7 +32,11 @@ export default function MapPage() {
           method: "GET",
         });
 
-        if (response.status >= 400) {
+        const timeResponse = await fetch(`http://localhost:8080/map/${mapId}`, {
+          method: "POST",
+        });
+
+        if (response.status >= 400 || timeResponse.status >= 400) {
           const errors = await response.json();
           console.log(errors);
           setError(errors);
@@ -39,6 +45,8 @@ export default function MapPage() {
         if (response.status === 200) {
           const res = await response.json();
           console.log(res)
+          const timeRes = await timeResponse.json();
+          console.log('START TIME REQUEST', timeRes)
           const mapName = res.map.name;
           const targets = res.map.targets;
 
@@ -117,6 +125,7 @@ export default function MapPage() {
   return (
     <div >
       <h2>Map page</h2>
+      <Stopwatch />
       <div className={styles.imgContainer}>
         {isVisible && 
         <Dropdown 
