@@ -26,6 +26,8 @@ export default function MapPage() {
   let {mapId} = useParams();
 
   useEffect(() => {
+    let controller = new AbortController();
+    console.log(controller)
     const data = async () => {
       try {
         const response = await fetch(`http://localhost:8080/map/${mapId}`, {
@@ -34,7 +36,9 @@ export default function MapPage() {
 
         const timeResponse = await fetch(`http://localhost:8080/map/${mapId}`, {
           method: "POST",
+          signal: controller.signal
         });
+
 
         if (response.status >= 400 || timeResponse.status >= 400) {
           const errors = await response.json();
@@ -67,6 +71,7 @@ export default function MapPage() {
       }
     };
     data();
+    return () => controller?.abort();
   }, []);
 
   // Create a new array that calculates the reverse normalized coordinates of each target
