@@ -47,7 +47,7 @@ export default function Dropdown({targets, coordinates, dimensions, handleTarget
       console.log(error);
     }
   }
-  
+
   return (
     <div style={{
       position: "absolute",

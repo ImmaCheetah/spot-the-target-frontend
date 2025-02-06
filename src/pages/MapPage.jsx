@@ -132,6 +132,25 @@ export default function MapPage() {
     setDimensions({ naturalWidth, naturalHeight, loadedWidth: rect.width, loadedHeight: rect.height });
   }
 
+  async function getEndingTimeReq(currentScoreId) {
+    try {
+      const response = await fetch(`http://localhost:8080/leaderboard/${currentScoreId}`, {
+        method: 'GET',
+      })
+
+      const res = await response.json();
+
+      console.log(res)
+    } catch (error) {
+      console.log(error)
+    }
+  }
+  
+  if (foundTargetCount === 3) {
+    console.log('CURRENT SCORE ID FROM IF CONDITION', currentScoreId)
+    getEndingTimeReq(currentScoreId)
+  }
+
   if (loading) return <p>Loading...</p>;
 
   return (
