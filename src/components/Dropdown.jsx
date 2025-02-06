@@ -2,7 +2,7 @@ import normalizeCoords from "../helper/normalizeCoords";
 import styles from "./components.module.css";
 import { useParams } from "react-router-dom";
 
-export default function Dropdown({targets, coordinates, dimensions, handleTargets}) {
+export default function Dropdown({targets, coordinates, dimensions, handleTargets, setFoundTargetCount}) {
   const {mapId} = useParams();
 
   function handleClick(e) {
@@ -36,6 +36,9 @@ export default function Dropdown({targets, coordinates, dimensions, handleTarget
         // Check if target is found and only then delete from dropdown locally
         if (res.isFound) {
           console.log('IN VERIFY FOUND', x, y)
+          setFoundTargetCount((prevCount) => {
+            return prevCount + 1
+          })
           handleTargets(targetId)
         }
       }

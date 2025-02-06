@@ -9,7 +9,7 @@ import TargetCircle from "../components/TargetCircle";
 import { standardCoords } from "../helper/normalizeCoords";
 import TargetMarker from "../components/TargetMarker";
 import Stopwatch from "../components/Stopwatch";
-
+import SubmitScore from "../components/SubmitScore";
 
 
 export default function MapPage() {
@@ -18,11 +18,13 @@ export default function MapPage() {
   const [clickedPos, setClickedPos] = useState({x: 0, y: 0});
   const [dimensions, setDimensions] = useState({ naturalWidth: 0, naturalHeight: 0, loadedWidth: 0, loadedHeight: 0 });
   const [targets, setTargets] = useState([]);
-  const [foundTargets, setFoundTargets] = useState([]);
+  const [foundTargetCoords, setFoundTargetCoords] = useState([]);
   const [imgSrc, setImgSrc] = useState();
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState(true);
-
+  const [currentScoreId, setCurrentScoreId] = useState(null);
+  const [foundTargetCount, setFoundTargetCount] = useState(0)
+  // console.log(targets)
   let {mapId} = useParams();
 
   useEffect(() => {
@@ -51,6 +53,7 @@ export default function MapPage() {
           console.log(res)
           const timeRes = await timeResponse.json();
           console.log('START TIME REQUEST', timeRes)
+          setCurrentScoreId(timeRes.startTime.id)
           const mapName = res.map.name;
           const targets = res.map.targets;
 
@@ -65,7 +68,11 @@ export default function MapPage() {
           }
         }
       } catch (error) {
-        console.log(error);
+        if (error.name === 'AbortError') {
+          console.log('Fetch request was aborted');
+        } else {
+          console.log(error)
+        }
       } finally {
         setLoading(false);
       }
@@ -84,7 +91,7 @@ export default function MapPage() {
       return {x: standardX, y: standardY, isFound: target.isFound}
     })
 
-    setFoundTargets(foundTargetsList)
+    setFoundTargetCoords(foundTargetsList)
   }, [targets, dimensions])
 
   function handleClick() {
@@ -130,7 +137,7 @@ export default function MapPage() {
   return (
     <div >
       <h2>Map page</h2>
-      <Stopwatch />
+      <Stopwatch winCondition={foundTargetCount}/>
       <div className={styles.imgContainer}>
         {isVisible && 
         <Dropdown 
@@ -138,9 +145,10 @@ export default function MapPage() {
           targets={targets} 
           dimensions={dimensions}
           handleTargets={handleTargets}
+          setFoundTargetCount={setFoundTargetCount}
         />}
         {isVisible && <TargetCircle coordinates={clickedPos}/>}
-        <TargetMarker targets={foundTargets} />
+        <TargetMarker targets={foundTargetCoords} />
         <img
           src={imgSrc}
           alt=""
@@ -150,6 +158,7 @@ export default function MapPage() {
           onLoad={handleImageLoad}
         />
       </div>
+      {foundTargetCount === 3 && <SubmitScore />}
     </div>
   )
 }
