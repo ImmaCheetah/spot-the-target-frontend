@@ -20,10 +20,11 @@ export default function MapPage() {
   const [targets, setTargets] = useState([]);
   const [foundTargetCoords, setFoundTargetCoords] = useState([]);
   const [imgSrc, setImgSrc] = useState();
-  const [error, setError] = useState(null);
-  const [loading, setLoading] = useState(true);
   const [currentScoreId, setCurrentScoreId] = useState(null);
   const [foundTargetCount, setFoundTargetCount] = useState(0)
+  const [finishedTime, setFinishedTime] = useState(null);
+  const [error, setError] = useState(null);
+  const [loading, setLoading] = useState(true);
   // console.log(targets)
   let {mapId} = useParams();
 
@@ -140,16 +141,24 @@ export default function MapPage() {
 
       const res = await response.json();
 
-      console.log(res)
+      const finalTime = Date.now() - res.startTime.startTime;
+      setFinishedTime(finalTime / 1000);
+      
+      console.log('Final TIME', finalTime)
+      return finalTime;
+
     } catch (error) {
       console.log(error)
     }
   }
   
-  if (foundTargetCount === 3) {
-    console.log('CURRENT SCORE ID FROM IF CONDITION', currentScoreId)
-    getEndingTimeReq(currentScoreId)
-  }
+  useEffect(() => {
+    if (foundTargetCount === 3) {
+      console.log('CURRENT SCORE ID FROM IF CONDITION', currentScoreId)
+
+      getEndingTimeReq(currentScoreId)
+    }
+  }, [foundTargetCount])
 
   if (loading) return <p>Loading...</p>;
 
@@ -177,7 +186,7 @@ export default function MapPage() {
           onLoad={handleImageLoad}
         />
       </div>
-      {foundTargetCount === 3 && <SubmitScore />}
+      {foundTargetCount === 3 && <SubmitScore finishedTime={finishedTime} scoreId={currentScoreId}/>}
     </div>
   )
 }
