@@ -1,10 +1,48 @@
+nav {
+  background-color: rgb(42, 42, 42);
+  color: white;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 4rem;
+  padding: 1rem;
+}
+
+.navMainTitle, .navLeaderboard {
+  font-size: 1.5rem;
+  color: white;
+  font-weight: bold;
+  text-decoration: none;
+}
+
+.selectContainer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 2rem;
+}
+
 .playBtn {
-  color: red;
+  border: none;
+  text-decoration: none;
+  padding: 0.5rem 1rem;
+  border-radius: 0.3rem;
+  background-color: rgb(73, 76, 90);
+  color: white;
+  
+}
+
+.mapTitle {
+  text-align: center;
+  font-weight: bold;
+  font-size: 1.2rem;
 }
 
 .cardImg {
   width: 300px;
+  height: 300px;
   /* image-rendering: pixelated; */
+  margin-bottom: 1rem;
 }
 
 .targetCircle {

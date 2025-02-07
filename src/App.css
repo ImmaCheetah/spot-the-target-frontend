@@ -120,6 +120,10 @@ input[type="number"] {
   -moz-appearance: textfield;
 }
 
+body {
+  background-color: rgb(255, 239, 239);
+}
+
 /* main {
   display: flex;
   flex-direction: column;

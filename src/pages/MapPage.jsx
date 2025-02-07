@@ -164,7 +164,6 @@ export default function MapPage() {
 
   return (
     <div >
-      <h2>Map page</h2>
       <Stopwatch winCondition={foundTargetCount}/>
       <div className={styles.imgContainer}>
         {isVisible && 

@@ -31,6 +31,8 @@ export default function SubmitScore({finishedTime, scoreId}) {
 
   return (
     <form onSubmit={handleSubmit}>
+      <p>You found all targets!</p>
+      <p>Enter your name to submit your score</p>
       <label htmlFor="name">Name</label>
       <input type="text" name="name" max={10} required/>
       <button type="submit">Submit</button>
