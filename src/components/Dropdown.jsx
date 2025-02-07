@@ -60,7 +60,12 @@ export default function Dropdown({targets, coordinates, dimensions, handleTarget
             if (!target.isFound) {
               return (
                 <li key={index}>
-                  <button type="submit" id={target.id} onClick={handleClick}>
+                  <button 
+                    type="submit" 
+                    id={target.id} 
+                    onClick={handleClick} 
+                    className={styles.dropdownBtn}
+                  >
                     {target.name}
                   </button>
                 </li>

@@ -1,3 +1,4 @@
+import styles from "./components.module.css";
 import { useState, useEffect, useRef } from 'react';
 
 export default function Stopwatch({winCondition}) {
@@ -38,9 +39,9 @@ export default function Stopwatch({winCondition}) {
   }
 
   return (
-    <>
-      <h1>Time passed: {formatTime(secondsPassed)}</h1>
-    </>
+    <div className={styles.stopwatchDiv}>
+      <p className={styles.stopwatchTime}>{formatTime(secondsPassed)}</p>
+    </div>
   );
 }
 

@@ -9,7 +9,7 @@ nav {
 }
 
 .navMainTitle, .navLeaderboard {
-  font-size: 1.5rem;
+  font-size: 2rem;
   color: white;
   font-weight: bold;
   text-decoration: none;
@@ -35,7 +35,7 @@ nav {
 .mapTitle {
   text-align: center;
   font-weight: bold;
-  font-size: 1.2rem;
+  font-size: 1.6rem;
 }
 
 .cardImg {
@@ -48,12 +48,46 @@ nav {
 .targetCircle {
   width: 50px;
   height: 50px;
-  border: dotted 3px white;
+  border: dotted 6px red;
   border-radius: 50%;
 }
 
 .dropdownList {
   list-style-type: none;
+  background-color: rgb(244, 223, 223);
+  border-radius: 0.4rem;
+  padding: 0.2rem;
+}
+
+.dropdownBtn {
+  padding: 0.5rem 1rem;
+  width: 7rem;
+  border: none;
+  border-radius: 0.4rem;
+  background-color: rgb(250, 177, 177);
+  margin-bottom: 0.1rem;
+  margin-top: 0.1rem;
+  font-size: 1.2rem;
+}
+
+.stopwatchDiv {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: rgb(108, 16, 16);
+  width: 8rem;
+  border-radius: 0.4rem;
+  margin: 0.5rem;
+  position: sticky;
+  top: 1rem;
+  z-index: 1;
+}
+
+.stopwatchTime {
+  font-size: 1.8rem;
+  color: white;
+  text-align: center;
+  margin-top: auto;
 }
 
 .targetFoundX {

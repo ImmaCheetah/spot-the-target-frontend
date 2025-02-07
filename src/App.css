@@ -46,8 +46,8 @@ ol[role="list"] {
 body {
   line-height: 1.5;
   box-sizing: border-box;
-  font-family: "Newsreader", serif;
-  font-optical-sizing: auto;
+  font-family: "VT323", serif;
+  font-weight: lighter;
   font-style: normal;
   position: relative;
 }
