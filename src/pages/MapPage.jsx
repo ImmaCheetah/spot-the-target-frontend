@@ -1,7 +1,4 @@
 import styles from "./pages.module.css";
-import carnisolImg from "../assets/maps/carnisol.gif"
-import prehistoricImg from "../assets/maps/prehistoric.gif"
-import medievalImg from "../assets/maps/medieval.gif"
 import { useState, useEffect } from "react";
 import { useParams } from "react-router-dom"
 import Dropdown from "../components/Dropdown";
@@ -10,6 +7,7 @@ import { standardCoords } from "../helper/normalizeCoords";
 import TargetMarker from "../components/TargetMarker";
 import Stopwatch from "../components/Stopwatch";
 import SubmitScore from "../components/SubmitScore";
+import getData from "../helper/data";
 
 
 export default function MapPage() {
@@ -51,21 +49,21 @@ export default function MapPage() {
 
         if (response.status === 200) {
           const res = await response.json();
-          console.log(res)
           const timeRes = await timeResponse.json();
-          console.log('START TIME REQUEST', timeRes)
-          setCurrentScoreId(timeRes.startTime.id)
           const mapName = res.map.name;
           const targets = res.map.targets;
+          const mapData = getData();
 
+          setCurrentScoreId(timeRes.startTime.id)
           setTargets(targets)
+          console.log(mapData)
 
           if (mapName === "Carnisol") {
-            setImgSrc(carnisolImg)
+            setImgSrc(mapData.carnisol.imgSrc)
           } else if (mapName === "Prehistoric") {
-            setImgSrc(prehistoricImg)
+            setImgSrc(mapData.prehistoric.imgSrc)
           } else {
-            setImgSrc(medievalImg)
+            setImgSrc(mapData.medieval.imgSrc)
           }
         }
       } catch (error) {

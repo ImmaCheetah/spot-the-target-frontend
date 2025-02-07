@@ -124,17 +124,17 @@ body {
   background-color: rgb(255, 239, 239);
 }
 
+
+button:hover, a:hover {
+  cursor: pointer;
+}
+
 /* main {
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
 }
-
-button:hover {
-  cursor: pointer;
-}
-
 #root {
   background-color: var(--main-background);
   min-height: 100vh;
