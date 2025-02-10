@@ -15,7 +15,7 @@ const routes = [
         element: <MapPage />,
       },
       {
-        path: "/leaderboard",
+        path: "/leaderboard/map/:mapId",
         element: <LeaderboardPage />,
       },
     ],
