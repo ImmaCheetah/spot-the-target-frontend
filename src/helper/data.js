@@ -1,6 +1,15 @@
 import carnisolImg from "../assets/maps/carnisol.gif"
 import prehistoricImg from "../assets/maps/prehistoric.gif"
 import medievalImg from "../assets/maps/medieval.gif"
+import bearImg from "../assets/maps/targets/bear.png"
+import batmanImg from "../assets/maps/targets/batman.png"
+import dolphinImg from "../assets/maps/targets/dolphin.png"
+import boneImg from "../assets/maps/targets/bone.png"
+import manImg from "../assets/maps/targets/man.png"
+import diegoImg from "../assets/maps/targets/diego.png"
+import knightImg from "../assets/maps/targets/knight.png"
+import lionelImg from "../assets/maps/targets/lionel.png"
+import skyrimImg from "../assets/maps/targets/skyrim.png"
 
 export default function getData() {
   const maps = {
@@ -8,41 +17,41 @@ export default function getData() {
       "imgSrc": carnisolImg,
       "targets": {
         "bear": {
-          "imgSrc": "../assets/targets/bear.png"
+          "imgSrc": bearImg
         },
         "batman": {
-          "imgSrc": "../assets/targets/batman.png"
+          "imgSrc": batmanImg
         },
         "dolphin": {
-          "imgSrc": "../assets/targets/dolphin.png"
+          "imgSrc": dolphinImg
         }
       }
     },
     "prehistoric": {
       "imgSrc": prehistoricImg,
-      "targets": {
-        "bone": {
-          "imgSrc": "../assets/targets/bone.png"
+      "targets": [
+        {
+          "imgSrc": boneImg
         },
-        "man": {
-          "imgSrc": "../assets/targets/man.png"
+        {
+          "imgSrc": manImg
         },
-        "diego": {
-          "imgSrc": "../assets/targets/diego.png"
+        {
+          "imgSrc": diegoImg
         }
-      }
+      ]
     },
     "medieval": {
       "imgSrc": medievalImg,
       "targets": {
         "knight": {
-          "imgSrc": "../assets/targets/knight.png"
+          "imgSrc": knightImg
         },
         "lionel": {
-          "imgSrc": "../assets/targets/lionel.png"
+          "imgSrc": lionelImg
         },
         "skyrim": {
-          "imgSrc": "../assets/targets/skyrim.png"
+          "imgSrc": skyrimImg
         }
       }
     }

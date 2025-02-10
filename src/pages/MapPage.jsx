@@ -8,7 +8,7 @@ import TargetMarker from "../components/TargetMarker";
 import Stopwatch from "../components/Stopwatch";
 import SubmitScore from "../components/SubmitScore";
 import getData from "../helper/data";
-
+import TargetList from "../components/TargetList";
 
 export default function MapPage() {
   const [isVisible, setIsVisible] = useState(false);
@@ -17,10 +17,11 @@ export default function MapPage() {
   const [dimensions, setDimensions] = useState({ naturalWidth: 0, naturalHeight: 0, loadedWidth: 0, loadedHeight: 0 });
   const [targets, setTargets] = useState([]);
   const [foundTargetCoords, setFoundTargetCoords] = useState([]);
-  const [imgSrc, setImgSrc] = useState();
+  const [map, setMap] = useState('');
   const [currentScoreId, setCurrentScoreId] = useState(null);
   const [foundTargetCount, setFoundTargetCount] = useState(0)
   const [finishedTime, setFinishedTime] = useState(null);
+  const [isModalOpen, setModalOpen] = useState(false);
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState(true);
   // console.log(targets)
@@ -59,11 +60,11 @@ export default function MapPage() {
           console.log(mapData)
 
           if (mapName === "Carnisol") {
-            setImgSrc(mapData.carnisol.imgSrc)
+            setMap(mapData.carnisol)
           } else if (mapName === "Prehistoric") {
-            setImgSrc(mapData.prehistoric.imgSrc)
+            setMap(mapData.prehistoric)
           } else {
-            setImgSrc(mapData.medieval.imgSrc)
+            setMap(mapData.medieval)
           }
         }
       } catch (error) {
@@ -153,7 +154,7 @@ export default function MapPage() {
   useEffect(() => {
     if (foundTargetCount === 3) {
       console.log('CURRENT SCORE ID FROM IF CONDITION', currentScoreId)
-
+      setModalOpen(true);
       getEndingTimeReq(currentScoreId)
     }
   }, [foundTargetCount])
@@ -163,6 +164,7 @@ export default function MapPage() {
   return (
     <div >
       <Stopwatch winCondition={foundTargetCount}/>
+      {/* <TargetList targets={map.targets}/> */}
       <div className={styles.imgContainer}>
         {isVisible && 
         <Dropdown 
@@ -175,7 +177,7 @@ export default function MapPage() {
         {isVisible && <TargetCircle coordinates={clickedPos}/>}
         <TargetMarker targets={foundTargetCoords} />
         <img
-          src={imgSrc}
+          src={map.imgSrc}
           alt=""
           className={styles.mapImg}
           onClick={handleClick}
@@ -183,7 +185,7 @@ export default function MapPage() {
           onLoad={handleImageLoad}
         />
       </div>
-      {foundTargetCount === 3 && <SubmitScore finishedTime={finishedTime} scoreId={currentScoreId}/>}
+      {foundTargetCount === 3 && <SubmitScore finishedTime={finishedTime} scoreId={currentScoreId} isModalOpen={isModalOpen}/>}
     </div>
   )
 }

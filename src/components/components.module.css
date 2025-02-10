@@ -101,3 +101,21 @@ nav {
   font-size: 1.5rem;
   font-weight: bold;
 }
+
+.formDialog {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translateX(-50%) translateY(-50%);
+  padding: 1rem;
+}
+
+.formDialog::backdrop {
+  background: hsl(0 0% 0% / 50%);
+}
+
+/* :modal {
+  background-color: beige;
+  border: 2px solid burlywood;
+  border-radius: 5px;
+} */
