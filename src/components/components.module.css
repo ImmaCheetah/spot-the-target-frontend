@@ -25,6 +25,7 @@ nav {
 .playBtn {
   border: none;
   text-decoration: none;
+  font-size: 1.3rem;
   padding: 0.5rem 1rem;
   border-radius: 0.3rem;
   background-color: rgb(73, 76, 90);
@@ -122,6 +123,7 @@ table {
   font-size: 1.4rem;
   min-width: 30rem;
   box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
+  margin-top: 1.5rem;
 }
 
 table thead tr {

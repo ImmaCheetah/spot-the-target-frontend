@@ -6,7 +6,7 @@ export default function HomePage() {
   return (
     <>
       <h1 className={styles.gameIntroHeader}>Select map to play!</h1>
-      <MapSelect />
+      <MapSelect origin='home'/>
     </>
   )
 }

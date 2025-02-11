@@ -1,6 +1,7 @@
 import { useEffect, useState} from "react";
 import { useParams } from "react-router-dom";
 import Leaderboard from "../components/Leaderboard";
+import MapSelect from "../components/MapSelect";
 
 
 export default function LeaderboardPage() {
@@ -42,11 +43,12 @@ export default function LeaderboardPage() {
       };
       data();
       return () => controller?.abort();
-    }, []);
+    }, [mapId]);
 
   return (
     <>
       <h1>Leaderboard page</h1>
+      <MapSelect />
       <Leaderboard leaderboard={leaderboard} />
     </>
   )

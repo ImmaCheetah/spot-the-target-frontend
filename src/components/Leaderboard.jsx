@@ -1,8 +1,6 @@
 import styles from "./components.module.css";
 
-
 export default function Leaderboard({leaderboard}) {
-
 
   return (
     <table>

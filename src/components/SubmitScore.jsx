@@ -1,10 +1,11 @@
 import { useRef, useEffect } from "react";
 import styles from "./components.module.css";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 
 export default function SubmitScore({finishedTime, scoreId, isModalOpen}) {
   const modalRef = useRef(null)
   let navigate = useNavigate();
+  let {mapId} = useParams();
 
   useEffect(() => {
 
@@ -28,7 +29,7 @@ export default function SubmitScore({finishedTime, scoreId, isModalOpen}) {
 
     console.log(name, finishedTime)
     submitScoreReq(scoreId, name, finishedTime);
-    navigate('/leaderboard')
+    navigate(`/leaderboard/map/${mapId}`)
 
   }
 
