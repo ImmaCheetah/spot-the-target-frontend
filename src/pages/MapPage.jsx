@@ -17,7 +17,7 @@ export default function MapPage() {
   const [dimensions, setDimensions] = useState({ naturalWidth: 0, naturalHeight: 0, loadedWidth: 0, loadedHeight: 0 });
   const [targets, setTargets] = useState([]);
   const [foundTargetCoords, setFoundTargetCoords] = useState([]);
-  const [map, setMap] = useState('');
+  const [map, setMap] = useState([]);
   const [currentScoreId, setCurrentScoreId] = useState(null);
   const [foundTargetCount, setFoundTargetCount] = useState(0)
   const [finishedTime, setFinishedTime] = useState(null);
@@ -26,6 +26,7 @@ export default function MapPage() {
   const [loading, setLoading] = useState(true);
   // console.log(targets)
   let {mapId} = useParams();
+  console.log('MAP',map)
 
   useEffect(() => {
     let controller = new AbortController();
@@ -164,7 +165,7 @@ export default function MapPage() {
   return (
     <div >
       <Stopwatch winCondition={foundTargetCount}/>
-      {/* <TargetList targets={map.targets}/> */}
+      <TargetList targets={map}/>
       <div className={styles.imgContainer}>
         {isVisible && 
         <Dropdown 

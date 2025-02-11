@@ -46,6 +46,16 @@ nav {
   margin-bottom: 1rem;
 }
 
+.targetsContainer {
+  border: solid 1px black;
+  height: 50px;
+}
+
+.targetImg {
+  width: 200px;
+  z-index: 2;
+}
+
 .targetCircle {
   width: 50px;
   height: 50px;
