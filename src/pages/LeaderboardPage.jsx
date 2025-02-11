@@ -1,12 +1,15 @@
 import { useEffect, useState} from "react";
 import { useParams } from "react-router-dom";
+import Leaderboard from "../components/Leaderboard";
+
 
 export default function LeaderboardPage() {
-  const [leaderboard, setLeaderboard] = useState([]);
+  const [leaderboard, setLeaderboard] = useState([{"username": 'bob'}]);
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState(true);
   let {mapId} = useParams();
 
+  console.log(leaderboard)
   useEffect(() => {
       let controller = new AbortController();
       console.log(controller)
@@ -25,7 +28,7 @@ export default function LeaderboardPage() {
           if (response.status === 200) {
             const res = await response.json();
             console.log(res)
-            setLeaderboard(res)
+            setLeaderboard(res.leaderboard)
           }
         } catch (error) {
           if (error.name === 'AbortError') {
@@ -44,7 +47,7 @@ export default function LeaderboardPage() {
   return (
     <>
       <h1>Leaderboard page</h1>
-
+      <Leaderboard leaderboard={leaderboard} />
     </>
   )
 }
