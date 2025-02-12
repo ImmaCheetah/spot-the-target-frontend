@@ -26,7 +26,7 @@ export default function MapPage() {
   const [loading, setLoading] = useState(true);
   // console.log(targets)
   let {mapId} = useParams();
-  console.log('MAP',map)
+  // console.log('MAP',map)
 
   useEffect(() => {
     let controller = new AbortController();
@@ -55,10 +55,10 @@ export default function MapPage() {
           const mapName = res.map.name;
           const targets = res.map.targets;
           const mapData = getData();
+          console.log('GET DATA', mapData)
 
           setCurrentScoreId(timeRes.startTime.id)
           setTargets(targets)
-          console.log(mapData)
 
           if (mapName === "Carnisol") {
             setMap(mapData.carnisol)
@@ -164,8 +164,10 @@ export default function MapPage() {
 
   return (
     <div >
-      <Stopwatch winCondition={foundTargetCount}/>
-      <TargetList targets={map}/>
+      <div className={styles.gameInfoDiv}>
+        <TargetList targets={map.targets}/>
+        <Stopwatch winCondition={foundTargetCount}/>
+      </div>
       <div className={styles.imgContainer}>
         {isVisible && 
         <Dropdown 

@@ -39,21 +39,15 @@ nav {
   font-size: 1.6rem;
 }
 
+.mapCard {
+  padding: 1rem;
+}
+
 .cardImg {
   width: 300px;
   height: 300px;
   /* image-rendering: pixelated; */
   margin-bottom: 1rem;
-}
-
-.targetsContainer {
-  border: solid 1px black;
-  height: 50px;
-}
-
-.targetImg {
-  width: 200px;
-  z-index: 2;
 }
 
 .targetCircle {
@@ -81,17 +75,45 @@ nav {
   font-size: 1.2rem;
 }
 
-.stopwatchDiv {
+.targetsContainer {
   display: flex;
   justify-content: center;
   align-items: center;
+  gap: 1rem;
+  width: 14rem;
+  padding: 0.4rem 0.5rem;
+  border-radius: 0.4rem;
+  background-color: #790202;
+}
+
+.targets {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.targetImg {
+  width: 50px;
+  border-radius: 0.4rem;
+  image-rendering: pixelated;
+}
+
+.targetName {
+  font-size: 1.2rem;
+  color: white;
+  line-height: 15px;
+  
+}
+
+.stopwatchDiv {
+  display: flex;
+  justify-content: center;
   background-color: rgb(108, 16, 16);
   width: 8rem;
   border-radius: 0.4rem;
   margin: 0.5rem;
-  position: sticky;
-  top: 1rem;
-  z-index: 1;
+  
 }
 
 .stopwatchTime {
@@ -108,8 +130,9 @@ nav {
   width: 40px;
   height: 40px;
   border: solid 1px red;
+  border-radius: 50%;
   color: red;
-  font-size: 1.5rem;
+  font-size: 2rem;
   font-weight: bold;
 }
 
@@ -123,6 +146,12 @@ nav {
 
 .formDialog::backdrop {
   background: hsl(0 0% 0% / 50%);
+}
+
+.selected {
+  border: solid 2px rgb(138, 9, 9);
+  border-radius: 1rem;
+  background-color: rgba(255, 0, 0, 0.1);
 }
 
 table {

@@ -1,7 +1,7 @@
 import styles from "./components.module.css";
 
 export default function TargetMarker({targets}) {
-  // console.log(targets)
+
   return (
     <div>
       {

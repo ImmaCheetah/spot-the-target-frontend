@@ -15,45 +15,54 @@ export default function getData() {
   const maps = {
   "carnisol": {
       "imgSrc": carnisolImg,
-      "targets": {
-        "bear": {
+      "targets": [
+        {
+          "name": "Bear",
           "imgSrc": bearImg
         },
-        "batman": {
+        {
+          "name": "Batman",
           "imgSrc": batmanImg
         },
-        "dolphin": {
+        {
+          "name": "Dolphin",
           "imgSrc": dolphinImg
         }
-      }
+      ]
     },
     "prehistoric": {
       "imgSrc": prehistoricImg,
       "targets": [
         {
+          "name": "Bone",
           "imgSrc": boneImg
         },
         {
+          "name": "Knife Man",
           "imgSrc": manImg
         },
         {
+          "name": "Diego",
           "imgSrc": diegoImg
         }
       ]
     },
     "medieval": {
       "imgSrc": medievalImg,
-      "targets": {
-        "knight": {
+      "targets": [
+        {
+          "name": "Knight",
           "imgSrc": knightImg
         },
-        "lionel": {
+        {
+          "name": "Lionel",
           "imgSrc": lionelImg
         },
-        "skyrim": {
+        {
+          "name": "Dovahkiin",
           "imgSrc": skyrimImg
         }
-      }
+      ]
     }
   }
 
