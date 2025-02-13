@@ -14,6 +14,7 @@ export default function Dropdown({targets, coordinates, dimensions, handleTarget
     verifyTargetReq(targetId, normX, normY);
   }
 
+
   async function verifyTargetReq(targetId, x, y) {
     try {
       const response = await fetch(`http://localhost:8080/map/${mapId}/target/${targetId}`, {

@@ -14,6 +14,7 @@ export default function MapPage() {
   const [isVisible, setIsVisible] = useState(false);
   const [mousePosition, setMousePosition] = useState({x: 0, y: 0});
   const [clickedPos, setClickedPos] = useState({x: 0, y: 0});
+  const [circlePos, setCirclePos] = useState({x: 0, y: 0});
   const [dimensions, setDimensions] = useState({ naturalWidth: 0, naturalHeight: 0, loadedWidth: 0, loadedHeight: 0 });
   const [targets, setTargets] = useState([]);
   const [foundTargetCoords, setFoundTargetCoords] = useState([]);
@@ -96,8 +97,26 @@ export default function MapPage() {
   }, [targets, dimensions])
 
   function handleClick() {
+    setClickedPos((mousePosition))
+    if (mousePosition.x >= window.innerWidth - 100) {
+      setClickedPos((prevPos) => {
+        return {
+          ...prevPos,
+          x: mousePosition.x - 170
+        }
+      })
+    }
+    if (mousePosition.y >= dimensions.loadedHeight - 100) {
+      setClickedPos((prevPos) => {
+        return {
+          ...prevPos,
+          y: mousePosition.y - 80
+        }
+      })
+    } 
+
     setIsVisible(!isVisible);
-    setClickedPos(mousePosition)
+    setCirclePos(mousePosition)
   }
 
   function handleMouseMove(e) {
@@ -177,7 +196,7 @@ export default function MapPage() {
           handleTargets={handleTargets}
           setFoundTargetCount={setFoundTargetCount}
         />}
-        {isVisible && <TargetCircle coordinates={clickedPos}/>}
+        {isVisible && <TargetCircle coordinates={circlePos}/>}
         <TargetMarker targets={foundTargetCoords} />
         <img
           src={map.imgSrc}

@@ -47,7 +47,11 @@ export default function LeaderboardPage() {
 
   return (
     <>
-      <h1>Leaderboard page</h1>
+      <h1 style={{
+        fontSize: "3rem",
+        textAlign: "center",
+        padding: "1rem"
+      }}>Leaderboards</h1>
       <MapSelect />
       <Leaderboard leaderboard={leaderboard} />
     </>
