@@ -1,6 +1,7 @@
 import normalizeCoords from "../helper/normalizeCoords";
 import styles from "./components.module.css";
 import { useParams } from "react-router-dom";
+import { toast } from 'react-toastify';
 
 export default function Dropdown({targets, coordinates, dimensions, handleTargets, setFoundTargetCount}) {
   const {mapId} = useParams();
@@ -41,6 +42,17 @@ export default function Dropdown({targets, coordinates, dimensions, handleTarget
             return prevCount + 1
           })
           handleTargets(targetId)
+        } else {
+          toast.error('Try again!', {
+            position: "top-center",
+            autoClose: 2000,
+            hideProgressBar: true,
+            closeOnClick: false,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+            theme: "dark",
+          });
         }
       }
       // console.log(response.json());

@@ -9,6 +9,7 @@ import Stopwatch from "../components/Stopwatch";
 import SubmitScore from "../components/SubmitScore";
 import getData from "../helper/data";
 import TargetList from "../components/TargetList";
+import { ToastContainer } from 'react-toastify';
 
 export default function MapPage() {
   const [isVisible, setIsVisible] = useState(false);
@@ -183,6 +184,7 @@ export default function MapPage() {
 
   return (
     <div >
+      <ToastContainer />
       <div className={styles.gameInfoDiv}>
         <TargetList targets={map.targets}/>
         <Stopwatch winCondition={foundTargetCount}/>
