@@ -30,7 +30,6 @@ nav {
   border-radius: 0.3rem;
   background-color: rgb(73, 76, 90);
   color: white;
-  
 }
 
 .mapTitle {
@@ -142,6 +141,37 @@ nav {
   left: 50%;
   transform: translateX(-50%) translateY(-50%);
   padding: 1rem;
+  border: solid 2px #790202;
+  border-radius: 0.8rem;
+}
+
+.formDialog form {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.formDialog p {
+  font-size: 1.5rem;
+  text-align: center;
+}
+
+.formDialog input {
+  padding: 0.2rem 0.3rem;
+  font-size: 1.3rem;
+  width: 10rem;
+}
+
+.formDialog button {
+  border: none;
+  text-decoration: none;
+  font-size: 1.3rem;
+  padding: 0.4rem 0.6rem;
+  border-radius: 0.3rem;
+  background-color: rgb(73, 76, 90);
+  color: white;
+  margin-top: 0.5rem;
 }
 
 .formDialog::backdrop {

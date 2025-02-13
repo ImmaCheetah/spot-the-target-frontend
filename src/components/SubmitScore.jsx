@@ -58,8 +58,8 @@ export default function SubmitScore({finishedTime, scoreId, isModalOpen}) {
       <form onSubmit={handleSubmit}>
         <p>You found all targets!</p>
         <p>Enter your name to submit your score</p>
-        <label htmlFor="name">Name</label>
-        <input type="text" name="name" max={10} required/>
+        <label htmlFor="name"></label>
+        <input type="text" name="name" maxLength={15} placeholder="Username" required/>
         <button type="submit">Submit</button>
       </form>
     </dialog>
