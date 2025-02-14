@@ -1,14 +1,14 @@
-import { useRef, useEffect } from "react";
+import { useRef, useEffect, useState } from "react";
 import styles from "./components.module.css";
 import { useNavigate, useParams } from "react-router-dom";
 
 export default function SubmitScore({finishedTime, scoreId, isModalOpen}) {
+  const [error, setError] = useState('');
   const modalRef = useRef(null)
   let navigate = useNavigate();
   let {mapId} = useParams();
 
   useEffect(() => {
-
     // Grabbing a reference to the modal in question
     const modalElement = modalRef.current;
     if (!modalElement) return;
@@ -24,13 +24,9 @@ export default function SubmitScore({finishedTime, scoreId, isModalOpen}) {
   function handleSubmit(e) {
     e.preventDefault();
     const form = new FormData(e.target);
-    console.log(form, finishedTime)
     const name = form.get("name");
 
-    console.log(name, finishedTime)
     submitScoreReq(scoreId, name, finishedTime);
-    navigate(`/leaderboard/map/${mapId}`)
-
   }
 
   async function submitScoreReq(scoreId, name, finishedTime) {
@@ -45,9 +41,13 @@ export default function SubmitScore({finishedTime, scoreId, isModalOpen}) {
           "Content-Type": "application/json",
         },
       });
-
       const res = await response.json();
-      console.log(res)
+
+      if (response.status === 200) {
+        navigate(`/leaderboard/map/${mapId}`);
+      } else {
+        setError(res.errors[0].msg)
+      }
     } catch (error) {
       console.log(error)
     }
@@ -61,6 +61,7 @@ export default function SubmitScore({finishedTime, scoreId, isModalOpen}) {
         <label htmlFor="name"></label>
         <input type="text" name="name" maxLength={15} placeholder="Username" required/>
         <button type="submit">Submit</button>
+        {error && <p>{error}</p>}
       </form>
     </dialog>
   );
