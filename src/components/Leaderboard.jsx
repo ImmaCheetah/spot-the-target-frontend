@@ -1,9 +1,8 @@
 import styles from "./components.module.css";
 
-export default function Leaderboard({leaderboard}) {
-
+export default function Leaderboard({ leaderboard }) {
   return (
-    <table>
+    <table className={styles.leaderboardTable}>
       <thead>
         <tr>
           <th>Rank</th>
@@ -12,18 +11,16 @@ export default function Leaderboard({leaderboard}) {
         </tr>
       </thead>
       <tbody>
-        {
-          leaderboard.map((entry, index) => {
-            return (
-              <tr key={index}>
-                <th>{index + 1}</th>
-                <th>{entry.username}</th>
-                <th>{entry.finalTime}s</th>
-              </tr>
-            )
-          })
-        }
+        {leaderboard.map((entry, index) => {
+          return (
+            <tr key={index}>
+              <th>{index + 1}</th>
+              <th>{entry.username}</th>
+              <th>{entry.finalTime}s</th>
+            </tr>
+          );
+        })}
       </tbody>
     </table>
-  )
+  );
 }

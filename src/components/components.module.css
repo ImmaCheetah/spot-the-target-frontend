@@ -8,7 +8,8 @@ nav {
   padding: 1rem;
 }
 
-.navMainTitle, .navLeaderboard {
+.navMainTitle,
+.navLeaderboard {
   font-size: 2rem;
   color: white;
   font-weight: bold;
@@ -102,7 +103,6 @@ nav {
   font-size: 1.2rem;
   color: white;
   line-height: 15px;
-  
 }
 
 .stopwatchDiv {
@@ -112,7 +112,6 @@ nav {
   width: 8rem;
   border-radius: 0.4rem;
   margin: 0.5rem;
-  
 }
 
 .stopwatchTime {
@@ -185,7 +184,7 @@ nav {
 }
 
 table {
-  border-collapse: collapse;
+  /* border-collapse: collapse; */
   position: absolute;
   left: 50%;
   transform: translateX(-50%);
@@ -193,6 +192,7 @@ table {
   min-width: 30rem;
   box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
   margin-top: 1.5rem;
+  margin-bottom: 10rem;
 }
 
 table thead tr {
@@ -201,7 +201,8 @@ table thead tr {
   text-align: center;
 }
 
-th, td{
+th,
+td {
   padding: 0.2rem 1rem;
 }
 
@@ -216,7 +217,6 @@ tbody tr:nth-child(odd) {
 tbody tr:nth-child(even) {
   background-color: #fff1f1;
 }
-
 /* :modal {
   background-color: beige;
   border: 2px solid burlywood;

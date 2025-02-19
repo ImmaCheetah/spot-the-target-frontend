@@ -124,8 +124,8 @@ body {
   background-color: rgb(255, 239, 239);
 }
 
-
-button:hover, a:hover {
+button:hover,
+a:hover {
   cursor: pointer;
 }
 

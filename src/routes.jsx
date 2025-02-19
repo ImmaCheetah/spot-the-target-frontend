@@ -4,7 +4,6 @@ import HomePage from "./pages/HomePage";
 import LeaderboardPage from "./pages/LeaderboardPage";
 import MapPage from "./pages/MapPage";
 
-
 const routes = [
   {
     element: <App />,

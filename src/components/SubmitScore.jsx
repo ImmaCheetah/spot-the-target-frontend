@@ -2,17 +2,17 @@ import { useRef, useEffect, useState } from "react";
 import styles from "./components.module.css";
 import { useNavigate, useParams } from "react-router-dom";
 
-export default function SubmitScore({finishedTime, scoreId, isModalOpen}) {
-  const [error, setError] = useState('');
-  const modalRef = useRef(null)
+export default function SubmitScore({ finishedTime, scoreId, isModalOpen }) {
+  const [error, setError] = useState("");
+  const modalRef = useRef(null);
   let navigate = useNavigate();
-  let {mapId} = useParams();
+  let { mapId } = useParams();
 
   useEffect(() => {
     // Grabbing a reference to the modal in question
     const modalElement = modalRef.current;
     if (!modalElement) return;
-  
+
     // Open modal when `isOpen` changes to true
     if (isModalOpen) {
       modalElement.showModal();
@@ -31,25 +31,28 @@ export default function SubmitScore({finishedTime, scoreId, isModalOpen}) {
 
   async function submitScoreReq(scoreId, name, finishedTime) {
     try {
-      const response = await fetch(`http://localhost:8080/leaderboard/${scoreId}`, {
-        method: "PATCH",
-        body: JSON.stringify({
-          name: name,
-          finishedTime: finishedTime
-        }),
-        headers: {
-          "Content-Type": "application/json",
+      const response = await fetch(
+        `http://localhost:8080/leaderboard/${scoreId}`,
+        {
+          method: "PATCH",
+          body: JSON.stringify({
+            name: name,
+            finishedTime: finishedTime,
+          }),
+          headers: {
+            "Content-Type": "application/json",
+          },
         },
-      });
+      );
       const res = await response.json();
 
       if (response.status === 200) {
         navigate(`/leaderboard/map/${mapId}`);
       } else {
-        setError(res.errors[0].msg)
+        setError(res.errors[0].msg);
       }
     } catch (error) {
-      console.log(error)
+      console.log(error);
     }
   }
 
@@ -59,7 +62,13 @@ export default function SubmitScore({finishedTime, scoreId, isModalOpen}) {
         <p>You found all targets!</p>
         <p>Enter your name to submit your score</p>
         <label htmlFor="name"></label>
-        <input type="text" name="name" maxLength={15} placeholder="Username" required/>
+        <input
+          type="text"
+          name="name"
+          maxLength={15}
+          placeholder="Username"
+          required
+        />
         <button type="submit">Submit</button>
         {error && <p>{error}</p>}
       </form>
