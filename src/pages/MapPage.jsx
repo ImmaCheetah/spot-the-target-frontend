@@ -33,7 +33,7 @@ export default function MapPage() {
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState(true);
   let { mapId } = useParams();
-  
+
   useEffect(() => {
     let controller = new AbortController();
     const data = async () => {
@@ -54,7 +54,6 @@ export default function MapPage() {
 
         if (response.status === 200) {
           const res = await response.json();
-          console.log(res);
           const timeRes = await timeResponse.json();
           const mapName = res.map.name;
           const targets = res.map.targets;
@@ -181,7 +180,6 @@ export default function MapPage() {
       const finalTime = Date.now() - res.startTime.startTime;
       setFinishedTime(finalTime / 1000);
 
-      console.log("Final TIME", finalTime);
       return finalTime;
     } catch (error) {
       console.log(error);

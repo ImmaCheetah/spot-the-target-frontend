@@ -6,12 +6,11 @@ import Error from "../components/Error";
 
 
 export default function LeaderboardPage() {
-  const [leaderboard, setLeaderboard] = useState([{ username: "bob" }]);
+  const [leaderboard, setLeaderboard] = useState([{}]);
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState(true);
   let { mapId } = useParams();
 
-  console.log(leaderboard);
   useEffect(() => {
     let controller = new AbortController();
     console.log(controller);
@@ -32,7 +31,6 @@ export default function LeaderboardPage() {
 
         if (response.status === 200) {
           const res = await response.json();
-          console.log(res);
           setLeaderboard(res.leaderboard);
         }
       } catch (error) {

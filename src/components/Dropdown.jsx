@@ -49,8 +49,7 @@ export default function Dropdown({
       const res = await response.json();
 
       if (response.status === 200) {
-        console.log(res);
-
+ 
         // Check if target is found and only then delete from dropdown locally
         if (res.isFound) {
           setFoundTargetCount((prevCount) => {
