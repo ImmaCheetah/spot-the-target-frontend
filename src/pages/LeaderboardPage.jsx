@@ -2,6 +2,8 @@ import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import Leaderboard from "../components/Leaderboard";
 import MapSelect from "../components/MapSelect";
+import Error from "../components/Error";
+
 
 export default function LeaderboardPage() {
   const [leaderboard, setLeaderboard] = useState([{ username: "bob" }]);
@@ -16,7 +18,7 @@ export default function LeaderboardPage() {
     const data = async () => {
       try {
         const response = await fetch(
-          `http://localhost:8080/leaderboard/map/${mapId}`,
+          `${import.meta.env.VITE_API_URL}/leaderboard/map/${mapId}`,
           {
             method: "GET",
           },
@@ -46,6 +48,12 @@ export default function LeaderboardPage() {
     data();
     return () => controller?.abort();
   }, [mapId]);
+
+  if (loading) return <p>Loading...</p>;
+  if (error)
+    return (
+      <Error name={error.name} status={error.status} message={error.errorMsg} />
+    );
 
   return (
     <>

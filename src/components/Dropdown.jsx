@@ -32,7 +32,7 @@ export default function Dropdown({
   async function verifyTargetReq(targetId, x, y) {
     try {
       const response = await fetch(
-        `http://localhost:8080/map/${mapId}/target/${targetId}`,
+        `${import.meta.env.VITE_API_URL}/map/${mapId}/target/${targetId}`,
         {
           method: "POST",
           body: JSON.stringify({
@@ -53,7 +53,6 @@ export default function Dropdown({
 
         // Check if target is found and only then delete from dropdown locally
         if (res.isFound) {
-          console.log("IN VERIFY FOUND", x, y);
           setFoundTargetCount((prevCount) => {
             return prevCount + 1;
           });
@@ -71,7 +70,6 @@ export default function Dropdown({
           });
         }
       }
-      // console.log(response.json());
     } catch (error) {
       console.log(error);
     }

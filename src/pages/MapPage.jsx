@@ -33,23 +33,22 @@ export default function MapPage() {
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState(true);
   let { mapId } = useParams();
-
+  
   useEffect(() => {
     let controller = new AbortController();
     const data = async () => {
       try {
-        const response = await fetch(`http://localhost:8080/map/${mapId}`, {
+        const response = await fetch(`${import.meta.env.VITE_API_URL}/map/${mapId}`, {
           method: "GET",
         });
 
-        const timeResponse = await fetch(`http://localhost:8080/map/${mapId}`, {
+        const timeResponse = await fetch(`${import.meta.env.VITE_API_URL}/map/${mapId}`, {
           method: "POST",
           signal: controller.signal,
         });
 
         if (response.status >= 400 || timeResponse.status >= 400) {
           const errors = await response.json();
-          console.log("MAP ERROR", errors);
           setError(errors);
         }
 
@@ -171,7 +170,7 @@ export default function MapPage() {
   async function getEndingTimeReq(currentScoreId) {
     try {
       const response = await fetch(
-        `http://localhost:8080/leaderboard/${currentScoreId}`,
+        `${import.meta.env.VITE_API_URL}/leaderboard/${currentScoreId}`,
         {
           method: "GET",
         },

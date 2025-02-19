@@ -13,7 +13,6 @@ export default function SubmitScore({ finishedTime, scoreId, isModalOpen }) {
     const modalElement = modalRef.current;
     if (!modalElement) return;
 
-    // Open modal when `isOpen` changes to true
     if (isModalOpen) {
       modalElement.showModal();
     } else {
@@ -32,7 +31,7 @@ export default function SubmitScore({ finishedTime, scoreId, isModalOpen }) {
   async function submitScoreReq(scoreId, name, finishedTime) {
     try {
       const response = await fetch(
-        `http://localhost:8080/leaderboard/${scoreId}`,
+        `${import.meta.env.VITE_API_URL}/leaderboard/${scoreId}`,
         {
           method: "PATCH",
           body: JSON.stringify({
