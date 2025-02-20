@@ -16,6 +16,10 @@ nav {
   text-decoration: none;
 }
 
+.navLeaderboard {
+  margin-left: 2rem;
+}
+
 .selectContainer {
   display: flex;
   justify-content: center;

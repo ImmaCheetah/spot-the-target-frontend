@@ -56,10 +56,20 @@ export default function Dropdown({
             return prevCount + 1;
           });
           handleTargets(targetId);
+          toast.success("Well done!", {
+            position: "top-center",
+            autoClose: 1500,
+            hideProgressBar: true,
+            closeOnClick: false,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+            theme: "dark",
+          });
         } else {
           toast.error("Try again!", {
             position: "top-center",
-            autoClose: 2000,
+            autoClose: 1500,
             hideProgressBar: true,
             closeOnClick: false,
             pauseOnHover: true,

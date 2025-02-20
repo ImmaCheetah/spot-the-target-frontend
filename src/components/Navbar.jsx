@@ -8,12 +8,17 @@ export default function Navbar() {
         <NavLink to="/" className={styles.navMainTitle}>
           Spot the Target
         </NavLink>
-        <NavLink
-          to="/leaderboard/map/e856e9ab-d110-4456-96eb-ccfe54176954"
-          className={styles.navLeaderboard}
-        >
-          Leaderboard
-        </NavLink>
+        <div>
+          <NavLink to="/" className={styles.navLeaderboard}>
+            Home
+          </NavLink>
+          <NavLink
+            to="/leaderboard/map/e856e9ab-d110-4456-96eb-ccfe54176954"
+            className={styles.navLeaderboard}
+          >
+            Leaderboard
+          </NavLink>
+        </div>
       </nav>
     </header>
   );
