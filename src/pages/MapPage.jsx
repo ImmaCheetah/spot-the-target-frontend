@@ -40,16 +40,29 @@ export default function MapPage() {
       try {
         const response = await fetch(`${import.meta.env.VITE_API_URL}/map/${mapId}`, {
           method: "GET",
+          headers: {
+            "Content-Type": "application/json",
+          },
         });
 
         const timeResponse = await fetch(`${import.meta.env.VITE_API_URL}/map/${mapId}`, {
           method: "POST",
           signal: controller.signal,
+          headers: {
+            "Content-Type": "application/json",
+          },
         });
 
-        if (response.status >= 400 || timeResponse.status >= 400) {
-          const errors = await response.json();
-          setError(errors);
+        if (response.status >= 400) {
+          setError({ name: 'Failed to fetch',
+            status: timeResponse.status
+         });
+        }
+
+        if (timeResponse.status >= 400) {
+          setError({ name: 'Failed to fetch',
+             status: timeResponse.status
+          });
         }
 
         if (response.status === 200) {
